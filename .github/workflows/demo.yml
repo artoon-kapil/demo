@@ -18,7 +18,7 @@ jobs:
         run: cd /home/demo
 
       - name: Pull Latest Code
-        run: git pull origin development
+        run: git pull origin main
 
       - name: Restart PM2 Process
         run: |
