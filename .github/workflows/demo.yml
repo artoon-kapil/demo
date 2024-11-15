@@ -23,6 +23,6 @@ jobs:
       - name: Restart PM2 Process
         run: |
           export PM2_HOME="/root/.pm2"
-          pm2 restart demo
+          pm2 restart helloworld
         env:
           CI: true
