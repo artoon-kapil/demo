@@ -1,16 +1,30 @@
 name: demo
-	on:
-	  workflow_dispatch:
+
+on:
+  workflow_dispatch:
+
 jobs:
   manual_deploy:
     runs-on: self-hosted
     environment: dev
     steps: 
       - uses: actions/checkout@v2
-      - run: export PATH=/root/.nvm/versions/node/v18.10.0/bin:${PATH}
-      - run: echo "$PATH"
-      - run: cd /home/demo          
-      - run: git pull origin development
-      - run: export PM2_HOME="/root/.pm2"; pm2 restart demo
+
+      - name: Set Node.js Path
+        run: export PATH=/root/.nvm/versions/node/v18.10.0/bin:${PATH}
+
+      - name: Verify PATH
+        run: echo "$PATH"
+
+      - name: Navigate to Project Directory
+        run: cd /home/demo
+
+      - name: Pull Latest Code
+        run: git pull origin development
+
+      - name: Restart PM2 Process
+        run: |
+          export PM2_HOME="/root/.pm2"
+          pm2 restart demo
         env:
           CI: true
